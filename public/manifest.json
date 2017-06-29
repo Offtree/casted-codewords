@@ -3,8 +3,8 @@
   "name": "Chrome Cast Codenames",
   "icons": [
     {
-      "src": "codenames.jpg",
-      "sizes": "133x33",
+      "src": "favicon.ico",
+      "sizes": "133x133",
       "type": "image/jpg"
     }
   ],
