@@ -44,4 +44,4 @@ WordTile.defaultProps = {
   marked: false
 }
 
-export default WordTile
+export default WordTile;
