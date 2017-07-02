@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import registerServiceWorker from './registerServiceWorker';
 import App from './pages/App';
-import CastReciever from './organisms/CastReciever';
+import CastReciever from './pages/CastReciever';
 import createStore from './state';
 
 // Needed for onTouchTap

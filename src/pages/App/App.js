@@ -46,8 +46,6 @@ class App extends Component {
           goals={goals}
         />
 
-        SMOKE TEST
-
         <MainActionButton 
           openDialog={this.handleDescriptionDialogOpen}
         />
