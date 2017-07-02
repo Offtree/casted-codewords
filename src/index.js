@@ -6,18 +6,20 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import registerServiceWorker from './registerServiceWorker';
 import App from './pages/App';
+import CastReciever from './organisms/CastReciever';
 import createStore from './state';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-
 const store = createStore();
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={store}>
-      <App />
+      <CastReciever>
+       <App />
+      </CastReciever>
     </Provider>
   </MuiThemeProvider>,
   document.getElementById('root')

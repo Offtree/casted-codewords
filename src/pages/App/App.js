@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 
-import Gameboard from '../../organisms/Gameboard';
 import Masterboard from '../../organisms/Masterboard';
 import Header from '../../organisms/Header';
+import MainActionButton from '../../organisms/MainActionButton';
 import GameInformation from '../../molecules/GameInformation';
 
 class App extends Component {
@@ -41,20 +40,18 @@ class App extends Component {
     } = this.state;
     return (
       <div>
-        <Header
-          openDialog={this.handleDescriptionDialogOpen}
-        />
+        <Header />
         <Masterboard
           tiles={tiles}
           goals={goals}
         />
-        <Gameboard
-          tiles={tiles}
-          goals={goals}
+
+        SMOKE TEST
+
+        <MainActionButton 
+          openDialog={this.handleDescriptionDialogOpen}
         />
-        <Paper>
-          <button is="google-cast-button" style={{ height: 50, width: 50 }}></button>
-        </Paper>
+        <button is="google-cast-button" style={{ height: 30, width: 30 }}></button>
 
         <Dialog
           title="Game Description"

@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
-import { getOwnedBy, getMarked } from '../../state/game/reducer';
-import { selectTile } from '../../state/game/actions';
+import { getOwnedBy, getMarked, isStaged } from '../../state/game/reducer';
+import { stageSelection } from '../../state/game/actions';
 import KeyTile from './KeyTile';
 
 const mapStateToProps = (state, ownProps) => {
   return {
     ownedBy: getOwnedBy(state, ownProps.position),
+    staged: isStaged(state, ownProps.position),
     marked: getMarked(state, ownProps.position)
   }
 }
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (position) => {
-    dispatch(selectTile(position));
+    dispatch(stageSelection(position));
   }
 })
 

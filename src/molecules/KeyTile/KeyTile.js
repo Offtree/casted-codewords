@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import HighlightOffIcon from 'material-ui/svg-icons/action/highlight-off';
 import DoneIcon from 'material-ui/svg-icons/action/done';
+import DoneAll from 'material-ui/svg-icons/action/done-all';
 
 import {
   RED_TEAM,
@@ -20,17 +21,24 @@ class KeyTile extends Component {
       ownedBy,
       onSubmit,
       marked,
+      staged,
       position
     } = this.props;
-    const backgroundColor = COLOR_MAP[ownedBy];
+    let backgroundColor = COLOR_MAP[ownedBy];
     const submit = () => onSubmit(position);
+
+    let icon = <HighlightOffIcon/>;
+    if (staged) icon = <DoneIcon/>;
+    if (marked) icon = <DoneAll/>;
+
     return (
-      <KeyContainer isMarked>
+      <KeyContainer>
         <RaisedButton
-          onClick={submit}
+          disabled={marked}
+          onTouchTap={submit}
           backgroundColor={backgroundColor}
           style={{ minWidth: '100%' }}
-          icon={!marked ? <HighlightOffIcon/> : <DoneIcon/>}
+          icon={icon}
         />
       </KeyContainer>
     )

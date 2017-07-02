@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { find, sample, isUndefined, shuffle, range } from 'lodash';
 import { RED_TEAM, BLUE_TEAM, BOMB, FREE, BOARD_SIZE } from '../../constants/gameState';
-import { UNDO_SELECT, NEW_GAME, SELECT_TILE } from './actions';
+import { UNDO_SELECT, NEW_GAME, SELECT_TILE, STAGE_SELECTION } from './actions';
 
 const getAvailableSpots = () => {
   const grid = [];
@@ -33,7 +33,13 @@ export const getOwnedBy = (state, position) => {
   return FREE
 };
 export const getMarked = (state, position) => {
-  return !isUndefined(isInPositionList(state.game.turns, position));
+  return !isUndefined(isInPositionList(state.game.turns.pastTurns, position));
+}
+export const isStaged = (state, position) => {
+  return state.game.turns.stagedSelection === position;
+}
+export const getStaged = (state) => {
+  return state.game.turns.stagedSelection;
 }
 
 const goals = (state = {}, action) => {
@@ -45,20 +51,36 @@ const goals = (state = {}, action) => {
   }
 }
 
-const turns = (state = [], action) => {
+const turnState = {
+  pastTurns: [],
+  stagedSelection: null
+};
+
+const turns = (state = turnState, action) => {
   switch (action.type) {
     case SELECT_TILE:
-      return [...state, action.payload];
+      return {
+        stagedSelection: null,
+        pastTurns: [...state.pastTurns, state.stagedSelection]
+      }
     case UNDO_SELECT:
-      return state.slice(0, state.length - 1);
+      return {
+        ...state,
+        pastTurns: state.pastTurns.slice(0, state.length - 1)
+      }
     case NEW_GAME:
-      return [];
+      return { ...turnState };
+    case STAGE_SELECTION:
+      return {
+        ...state,
+        stagedSelection: action.payload
+      };
     default:
       return state;
   }
-}
+};
 
 export default combineReducers({
   goals,
-  turns
+  turns,
 });
