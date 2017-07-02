@@ -4,7 +4,7 @@ import { sampleSize, chunk } from 'lodash';
 import WORDS from '../../constants/words';
 import { BOARD_SIZE } from '../../constants/gameState';
 
-const buildBoard = () => {
+export const buildBoard = () => {
   const gameWords = sampleSize(WORDS, BOARD_SIZE*BOARD_SIZE);
   return chunk(gameWords, BOARD_SIZE);
 }
