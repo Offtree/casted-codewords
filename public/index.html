@@ -30,7 +30,8 @@
     <script>
       window.cast = cast;
       initializeCastApi = function() {
-        cast.framework.CastContext.getInstance().setOptions({
+        window.sender = cast.framework.CastContext.getInstance();
+        window.sender.setOptions({
           receiverApplicationId: '2A14A229',
           autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
         });

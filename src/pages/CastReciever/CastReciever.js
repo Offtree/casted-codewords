@@ -23,11 +23,10 @@ class CastReciever extends Component {
   setUpEvents() {
     // handler for 'senderdisconnected' event
     this.castMananger.onSenderDisconnected = function(event) {
-      console.log('Received Sender Disconnected event: ' + event.data);
       if (this.castMananger.getSenders().length === 0) window.close();
     };
+
     this.messageBus.onMessage = function(event) {
-      console.log('Message [' + event.senderId + ']: ' + event.data);
       this.messageBus.send(event.senderId, event.data);
       this.setState({
         message: event.data
@@ -39,14 +38,20 @@ class CastReciever extends Component {
       receiver,
       message
     } = this.state;
+
     return (
       <div>
+        <div style={{width: 400, height: 400, backgroundColor: 'red'}}>
+          {window.navigator.platform} SMOKE
+        </div>
         {receiver ? 
           <div>
-            <Gameboard
-              tiles={buildBoard()}
-            />
-            {{message}}
+            {message ?
+              <Gameboard
+                tiles={buildBoard()}
+              /> :
+              "Start a game!"
+            }
           </div>: 
           this.props.children
         }
