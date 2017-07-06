@@ -7,14 +7,17 @@ class CastReciever extends Component {
     super(props);
     let receiver = false;
     if (window.navigator.platform !== 'MacIntel') {
-      receiver = true;
-      this.castMananger = window.cast.receiver.CastReceiverManager.getInstance();
-      this.castMananger.start();
-      this.messageBus = this.castReceiverManager.getCastMessageBus(
-        'urn:x-cast:com.google.cast.codenames.event'
-      );
-
-      this.setUpEvents();
+      window['__onGCastApiAvailable'] = function(isAvailable) {
+        if (isAvailable) {
+            receiver = true;
+            this.castMananger = window.cast.receiver.CastReceiverManager.getInstance();
+            this.castMananger.start();
+            this.messageBus = this.castReceiverManager.getCastMessageBus(
+              'urn:x-cast:com.google.cast.codenames.event'
+            );
+            this.setUpEvents();
+          }
+      };
     }
     this.state = {
       receiver
