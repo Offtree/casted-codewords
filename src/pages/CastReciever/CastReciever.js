@@ -2,23 +2,20 @@ import React, { Component } from 'react'
 import Gameboard from '../../organisms/Gameboard';
 import { buildBoard } from '../../state/board/reducer';
 
+import CastedBackdrop from '../../atoms/CastedBackdrop';
 class CastReciever extends Component {
   constructor(props) {
     super(props);
     let receiver = false;
-    if (window.navigator.platform !== 'MacIntel') {
-      window['__onGCastApiAvailable'] = function(isAvailable) {
-        if (isAvailable) {
-            receiver = true;
-            this.castMananger = window.cast.receiver.CastReceiverManager.getInstance();
-            this.castMananger.start();
-            this.messageBus = this.castReceiverManager.getCastMessageBus(
-              'urn:x-cast:com.google.cast.codenames.event'
-            );
-            this.setUpEvents();
-          }
-      };
-    }
+    if (window.navigator.platform === 'Linux armv71') {
+      receiver = true;
+      this.castMananger = window.cast.receiver.CastReceiverManager.getInstance();
+      this.castMananger.start();
+      this.messageBus = this.castReceiverManager.getCastMessageBus(
+        'urn:x-cast:com.google.cast.codenames.event'
+      );
+      this.setUpEvents();
+    };
     this.state = {
       receiver
     }
@@ -44,18 +41,15 @@ class CastReciever extends Component {
 
     return (
       <div>
-        <div style={{width: 400, height: 400, backgroundColor: 'red'}}>
-          {window.navigator.platform} SMOKE
-        </div>
         {receiver ? 
-          <div>
+          <CastedBackdrop>
             {message ?
               <Gameboard
                 tiles={buildBoard()}
               /> :
               "Start a game!"
             }
-          </div>: 
+          </CastedBackdrop>: 
           this.props.children
         }
       </div>

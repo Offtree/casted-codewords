@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import App from './pages/App';
 import CastReciever from './pages/CastReciever';
 import createStore from './state';
@@ -24,4 +24,4 @@ ReactDOM.render(
   </MuiThemeProvider>,
   document.getElementById('root')
 );
-registerServiceWorker();
+// registerServiceWorker();
