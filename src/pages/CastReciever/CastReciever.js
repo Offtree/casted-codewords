@@ -6,28 +6,28 @@ import CastedBackdrop from '../../atoms/CastedBackdrop';
 class CastReciever extends Component {
   constructor(props) {
     super(props);
-    let receiver = false;
-    if (window.navigator.platform === 'Linux armv71') {
-      receiver = true;
-      this.castMananger = window.cast.receiver.CastReceiverManager.getInstance();
-      this.castMananger.start();
-      this.messageBus = this.castReceiverManager.getCastMessageBus(
-        'urn:x-cast:com.google.cast.codenames.event'
-      );
-      this.setUpEvents();
-    };
+    this.castMananger = window.cast.receiver.CastReceiverManager.getInstance();
+    this.messageBus = this.castMananger.getCastMessageBus(
+      'urn:x-cast:com.google.cast.codenames.action'
+    );
+    this.castMananger.start();
+    this.setUpEvents();
+  
     this.state = {
-      receiver
-    }
+      message: 'None Yet'
+    };
   }
+
   setUpEvents() {
     // handler for 'senderdisconnected' event
     this.castMananger.onSenderDisconnected = function(event) {
       if (this.castMananger.getSenders().length === 0) window.close();
     };
-
+    
+    // handler for messageBus
     this.messageBus.onMessage = function(event) {
       this.messageBus.send(event.senderId, event.data);
+      this.dispatch(event.data);
       this.setState({
         message: event.data
       });
@@ -35,23 +35,17 @@ class CastReciever extends Component {
   }
   render () {
     const {
-      receiver,
       message
     } = this.state;
 
     return (
       <div>
-        {receiver ? 
-          <CastedBackdrop>
-            {message ?
-              <Gameboard
-                tiles={buildBoard()}
-              /> :
-              "Start a game!"
-            }
-          </CastedBackdrop>: 
-          this.props.children
-        }
+        <CastedBackdrop>
+          <Gameboard
+            tiles={buildBoard()}
+          />
+          <div>{message}</div>
+        </CastedBackdrop>
       </div>
     )
   }

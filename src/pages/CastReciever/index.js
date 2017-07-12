@@ -1,2 +1,13 @@
+import { connect } from 'react-redux';
 import CastReciever from './CastReciever';
-export default CastReciever;
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchSenderEvent(event) {
+    dispatch(event);
+  }
+})
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(CastReciever);

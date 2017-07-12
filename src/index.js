@@ -5,7 +5,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // import registerServiceWorker from './registerServiceWorker';
-import App from './pages/App';
 import CastReciever from './pages/CastReciever';
 import createStore from './state';
 
@@ -17,9 +16,7 @@ const store = createStore();
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={store}>
-      <CastReciever>
-       <App />
-      </CastReciever>
+      <CastReciever />
     </Provider>
   </MuiThemeProvider>,
   document.getElementById('root')

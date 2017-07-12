@@ -16,8 +16,6 @@ const WordTile = (props) => {
     word,
     ownedBy,
     marked,
-    position,
-    select
   } = props;
   const backgroundColor = marked ? COLOR_MAP[ownedBy] : undefined;
 
@@ -25,7 +23,6 @@ const WordTile = (props) => {
       <TileContainer>
         <RaisedButton
           backgroundColor={backgroundColor}
-          onClick={() => select(position)}
           style={{width:'100%'}}
           label={word}
         />
@@ -36,7 +33,6 @@ WordTile.propTypes = {
   word: PropTypes.string,
   ownedBy: PropTypes.oneOf([RED_TEAM, BLUE_TEAM, BOMB, FREE]),
   marked: PropTypes.bool,
-  select: PropTypes.func
 }
 WordTile.defaultProps = {
   word: 'No Word Found',

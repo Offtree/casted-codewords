@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { getOwnedBy, getMarked } from '../../state/game/reducer';
-import { pushStaged } from '../../state/game/actions';
 import WordTile from './WordTile';
 
 const mapStateToProps = (state, ownProps) => {
@@ -9,13 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     marked: getMarked(state, ownProps.position)
   }
 }
-const mapDispatchToProps = (dispatch) => ({
-  select: (position) => {
-    dispatch(pushStaged(position));
-  }
-})
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(WordTile);
