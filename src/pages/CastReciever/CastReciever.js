@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { isArray } from 'lodash';
 import Gameboard from '../../organisms/Gameboard';
-import { buildBoard } from '../../state/board/reducer';
 
 import CastedBackdrop from '../../atoms/CastedBackdrop';
 class CastReciever extends Component {
+
   constructor(props) {
     super(props);
     this.CastReceiverManager = window.cast.receiver.CastReceiverManager.getInstance();
@@ -16,7 +17,7 @@ class CastReciever extends Component {
   }
 
   setUpEvents() {
-    this.messageBus = this.castMananger.getCastMessageBus(
+    this.messageBus = this.CastReceiverManager.getCastMessageBus(
       'urn:x-cast:com.google.cast.codenames.action'
     );
 
@@ -27,25 +28,32 @@ class CastReciever extends Component {
     
     // handler for messageBus
     this.messageBus.onMessage = (event) => {
-      this.messageBus.send(event.senderId, event.data);
-      this.dispatch(event.data);
       this.setState({
-        message: event.data
+        message: JSON.stringify(event.data)
       });
+      this.props.dispatchSenderEvent(JSON.parse(event.data));
     }
   }
+
   render () {
     const {
       message
     } = this.state;
 
+    const {
+      board
+    } = this.props;
+
     return (
       <div>
         <CastedBackdrop>
-          <Gameboard
-            tiles={buildBoard()}
-          />
-          <div>{message}</div>
+          { board !== null ?
+            <Gameboard
+              tiles={board}
+            /> :
+            <div> Start a game!</div>
+          }
+          <div>LAST EVENT: {message}</div>
         </CastedBackdrop>
       </div>
     )

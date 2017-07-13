@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { find, sample, isUndefined, shuffle, range } from 'lodash';
+import { find, sample, isUndefined, shuffle, range, isEqual } from 'lodash';
 import { RED_TEAM, BLUE_TEAM, BOMB, FREE, BOARD_SIZE } from '../../constants/gameState';
 import { UNDO_SELECT, NEW_GAME, SELECT_TILE, STAGE_SELECTION } from './actions';
 
@@ -35,11 +35,11 @@ export const getOwnedBy = (state, position) => {
 export const getMarked = (state, position) => {
   return !isUndefined(isInPositionList(state.game.turns.pastTurns, position));
 }
-export const isStaged = (state, position) => {
-  return state.game.turns.stagedSelection === position;
-}
 export const getStaged = (state) => {
   return state.game.turns.stagedSelection;
+}
+export const isStaged = (state, position) => {
+  return isEqual(getStaged(state), position);
 }
 
 const goals = (state = {}, action) => {

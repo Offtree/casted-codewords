@@ -9,7 +9,7 @@ export const buildBoard = () => {
   return chunk(gameWords, BOARD_SIZE);
 }
 
-export default (state = [], action) => {
+export default (state = null, action) => {
   switch (action.type) {
     case GENERATE_BOARD:
     case NEW_GAME:

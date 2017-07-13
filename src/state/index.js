@@ -10,3 +10,5 @@ const reducers = combineReducers({
 export default () => {
   return createStore(reducers);
 };
+
+export const getBoard = (state) => state.board;

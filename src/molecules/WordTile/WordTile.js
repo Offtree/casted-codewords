@@ -16,8 +16,12 @@ const WordTile = (props) => {
     word,
     ownedBy,
     marked,
+    staged
   } = props;
-  const backgroundColor = marked ? COLOR_MAP[ownedBy] : undefined;
+
+  let backgroundColor;
+  backgroundColor = staged ? COLOR_MAP.staged : backgroundColor;
+  backgroundColor = marked ? COLOR_MAP[ownedBy] : backgroundColor;
 
   return (
       <TileContainer>
@@ -33,11 +37,13 @@ WordTile.propTypes = {
   word: PropTypes.string,
   ownedBy: PropTypes.oneOf([RED_TEAM, BLUE_TEAM, BOMB, FREE]),
   marked: PropTypes.bool,
+  staged: PropTypes.bool
 }
 WordTile.defaultProps = {
   word: 'No Word Found',
   ownedBy: FREE,
-  marked: false
+  marked: false,
+  staged: 'poop'
 }
 
 export default WordTile;
