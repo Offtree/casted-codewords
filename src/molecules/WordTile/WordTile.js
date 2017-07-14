@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
+import { constants } from 'codenames-state';
+import RaisedButton from 'material-ui/RaisedButton';
+
+import TileContainer from '../../atoms/TileContainer';
+
+const {
   RED_TEAM,
   BLUE_TEAM,
   BOMB,
   FREE,
   COLOR_MAP
-} from '../../constants/gameState';
-
-import TileContainer from '../../atoms/TileContainer';
-import RaisedButton from 'material-ui/RaisedButton';
+} = constants;
 
 const WordTile = (props) => {
   const {

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { getBoard } from '../../state';
-import { getStaged } from '../../state/game/reducer';
+import { selectors } from 'codenames-state'
 import CastReciever from './CastReciever';
 
 const mapDispatchToProps = (dispatch) => ({
@@ -10,8 +9,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-  board: getBoard(state),
-  staged: getStaged(state)
+  board: selectors.getBoard(state),
+  staged: selectors.getStaged(state)
 });
 
 export default connect(

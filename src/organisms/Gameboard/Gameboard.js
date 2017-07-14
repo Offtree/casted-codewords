@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import GameboardContainer from '../../atoms/GameboardContainer';
 import WordTile from '../../molecules/WordTile';
+
 
 const Gameboard = (props) => {
   const {
@@ -8,7 +11,7 @@ const Gameboard = (props) => {
   } = props;
 
   return (
-    <div>
+    <GameboardContainer>
       {tiles.map( (row, i) =>
         <div key={`${i}`} style={{ margin: 'auto' }}>
           {row.map( (tile, b) =>
@@ -20,7 +23,7 @@ const Gameboard = (props) => {
           )}
         </div>
       )}
-    </div>
+    </GameboardContainer>
   )
 }
 Gameboard.propTypes = {
