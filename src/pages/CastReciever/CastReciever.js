@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { isArray } from 'lodash';
-import Gameboard from '../../organisms/Gameboard';
+import Dialog from 'material-ui/Dialog';
 
+import Gameboard from '../../organisms/Gameboard';
+import GameInformation from '../../molecules/GameInformation';
 import CastedBackdrop from '../../atoms/CastedBackdrop';
 class CastReciever extends Component {
 
@@ -41,7 +44,8 @@ class CastReciever extends Component {
     } = this.state;
 
     const {
-      board
+      board,
+      helpDialogOpen
     } = this.props;
 
     return (
@@ -53,11 +57,28 @@ class CastReciever extends Component {
             /> :
             <div> Start a game!</div>
           }
+
+          <Dialog
+            title="Game Description"
+            open={helpDialogOpen}
+          >
+            <GameInformation/>
+          </Dialog>
           <div>LAST EVENT: {message}</div>
         </CastedBackdrop>
       </div>
     )
   }
 }
+
+CastReciever.propTypes = {
+  helpDialogOpen: PropTypes.bool,
+  board: PropTypes.array,
+};
+
+CastReciever.defaultProps = {
+  helpDialogOpen: false,
+  board: null
+};
 
 export default CastReciever
