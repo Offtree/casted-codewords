@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // import registerServiceWorker from './registerServiceWorker';
 import CastReciever from './pages/CastReciever';
-import makeGameStore from 'codenames-state';
+import { makeGameStore } from 'codenames-state';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
